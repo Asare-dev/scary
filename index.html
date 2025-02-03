@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>scary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Supherhero">
+    <meta name="keywords" content="programming hero,learn programming">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon">
+    
+
+    <!--custom css-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+    <h3></h3>
+
+    
+
+</div>
+
+
+
+
+
+<!--main js-->
+<script src="js/main.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrifying Horror Prank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: black;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        .content {
+            padding: 20px;
+            font-size: 22px;
+        }
+        .hidden {
+            display: none;
+        }
+        #scare-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 9999;
+            display: none;
+            filter: brightness(0.5);
+        }
+        #eye {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: red;
+            opacity: 0;
+            animation: eye-glow 1s infinite alternate;
+        }
+        @keyframes eye-glow {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, -5px); }
+            50% { transform: translate(-5px, 5px); }
+            75% { transform: translate(5px, 5px); }
+            100% { transform: translate(-5px, -5px); }
+        }
+        .creepy-message {
+            position: fixed;
+            font-size: 30px;
+            color: red;
+            opacity: 0;
+            animation: flashText 0.8s infinite;
+        }
+        @keyframes flashText {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .crawling {
+            position: fixed;
+            top: 100%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: url('Nun.jpg') no-repeat; /* Update this with your own image */
+            background-size: cover;
+            animation: crawl 4s infinite;
+        }
+        @keyframes crawl {
+            0% { top: 100%; left: 50%; }
+            100% { top: 40%; left: 50%; }
+        }
+        #footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: white;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Welcome to Fun Facts About the Universe</h1>
+        <p>Did you know that the sun is 93 million miles away?</p>
+        <p>Stay and read some cool facts...</p>
+    </div>
+
+    <!-- Hidden Scary Image -->
+    <img id="scare-image" src="Nun.jpg" alt="Scary Face"> <!-- Replace this with your own image -->
+    <div id="eye"></div>
+    <div class="crawling hidden"></div>
+
+    <!-- Footer: Created by Coletech -->
+    <div id="footer">Created by Coletech</div>
+
+    <script>
+        // Disable the back button
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+
+        // Function to create flashing creepy messages
+        function showCreepyMessage(text, top, left) {
+            let message = document.createElement("div");
+            message.className = "creepy-message";
+            message.textContent = text;
+            message.style.top = top + "px";
+            message.style.left = left + "px";
+            document.body.appendChild(message);
+            setTimeout(() => document.body.removeChild(message), 3000);
+        }
+
+        // Play random ghost whispers
+        function playWhisper() {
+            let whispers = [
+                "https://www.fesliyanstudios.com/play-mp3/6428", // Whisper sound
+                "https://www.fesliyanstudios.com/play-mp3/6169", // Scary sound
+                "https://www.fesliyanstudios.com/play-mp3/6100"  // Evil laugh sound
+            ];
+            let audio = new Audio(whispers[Math.floor(Math.random() * whispers.length)]);
+            audio.volume = 0.5;
+            audio.play();
+        }
+
+        // Play random scary growls
+        function playGrowl() {
+            let growls = [
+                "https://www.fesliyanstudios.com/play-mp3/6244", // Growl sound
+                "https://www.fesliyanstudios.com/play-mp3/5964", // Monster growl
+            ];
+            let audio = new Audio(growls[Math.floor(Math.random() * growls.length)]);
+            audio.volume = 0.7;
+            audio.play();
+        }
+
+        // Fake device shutdown effect
+        function shutdownDevice() {
+            document.body.style.backgroundColor = "black";
+            let shutdownAudio = new Audio("https://www.fesliyanstudios.com/play-mp3/5983");
+            shutdownAudio.volume = 1.0;
+            shutdownAudio.play();
+            setTimeout(() => location.reload(), 2000);
+        }
+
+        // Start the horror prank
+        setTimeout(() => {
+            playWhisper();
+            setTimeout(() => showCreepyMessage("Do you hear that?", 200, 50), 2000);
+            setTimeout(() => showCreepyMessage("You're not alone...", 400, 300), 4000);
+            setTimeout(() => showCreepyMessage("RUN!", 300, 600), 6000);
+
+            // Jumpscare activation
+            setTimeout(() => {
+                document.body.classList.add("shake");
+                setTimeout(() => {
+                    document.body.classList.remove("shake");
+                    document.getElementById("scare-image").style.display = "block";
+                    let scream = new Audio("https://www.fesliyanstudios.com/play-mp3/6369"); // Distorted scream sound
+                    scream.volume = 1.0;
+                    scream.play();
+                    document.body.style.overflow = "hidden";
+                    document.getElementById("eye").style.opacity = 1;
+
+                    // Crawler effect
+                    document.querySelector(".crawling").classList.remove("hidden");
+
+                    // Random growl
+                    playGrowl();
+
+                    // Disable touch input for a few seconds
+                    document.body.style.pointerEvents = "none";
+                    setTimeout(() => {
+                        document.body.style.pointerEvents = "auto";
+                        shutdownDevice(); // Trigger device shutdown after a few seconds
+                    }, 5000);
+
+                }, 2000);
+            }, 10000);
+        }, 5000);
+    </script>
+</body>
+</html>
